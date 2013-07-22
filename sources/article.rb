@@ -1,8 +1,12 @@
 class Article
-  def initialize(article_pages)
-    @pages = article_pages
+  def initialize(article_page)
+    @page = article_pages
     @count = pages.length
+    @master = nil
+    @date = nil
+    @favorite = nil
+    @view = nil
   end
 
-  attr_reader :pages, :count
+  attr_reader :page, :count
 end
