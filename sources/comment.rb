@@ -6,5 +6,6 @@ class Comment
     @text = nil
     @color = nil
   end
-  attr_reader :comment, :user_name, :favorite, :text, :color
+
+  #attr_reader :comment, :user_name, :favorite, :text, :color
 end

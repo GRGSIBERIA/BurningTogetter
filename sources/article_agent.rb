@@ -11,9 +11,9 @@ class ArticleAgent
     puts "start to get articles"
     articles = []
     for link in listing.links
-      articles << @agent.get(link)
+      articles << Article.new(@agent.get(link))
     end
 
-    return Article.new(articles)
+    return articles
   end
 end
