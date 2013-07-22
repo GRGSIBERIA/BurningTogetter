@@ -1,6 +1,7 @@
 require 'mechanize'
 
 require './sources/listing.rb'
+require './sources/article.rb'
 
 class ArticleAgent
   def initialize
@@ -11,6 +12,7 @@ class ArticleAgent
     puts "start to get articles"
     articles = []
     for link in listing.links
+      puts "get article: #{link}"
       articles << Article.new(@agent.get(link))
     end
 

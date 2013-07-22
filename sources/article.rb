@@ -3,7 +3,6 @@ require './sources/comment.rb'
 class Article
   def initialize(article_page)
     @page = article_page
-    @count = pages.length
     @master = GetMaster()
     @date = nil
     @favorite = GetFavorite()
@@ -36,5 +35,5 @@ class Article
     comments_array
   end
 
-  attr_reader :page, :count, :master, :favorite, :view, :comments
+  attr_reader :page, :master, :favorite, :view, :comments
 end

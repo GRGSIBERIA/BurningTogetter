@@ -11,7 +11,7 @@ class Listing
     article_links = []
     puts "start to get links"
     for i in 0..@pages.length-1
-      article_links << GetArticleLinksInListingPage(i)
+      article_links += GetArticleLinksInListingPage(i)
     end
     puts "end to get links: count=> #{article_links.length}"
     puts ""
@@ -20,7 +20,7 @@ class Listing
 
   def GetArticleLinksInListing(topics_links)
     links = []
-    topics_links.each{|x| links << x.attribute("href")}
+    topics_links.each{|x| links << x.attribute("href").inner_text}
     return links
   end
 

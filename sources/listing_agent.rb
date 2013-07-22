@@ -1,7 +1,8 @@
+#-*- encoding: utf-8
 require 'mechanize'
 require 'cgi'
 
-require './source/listing.rb'
+require './sources/listing.rb'
 
 class ListingAgent
   def initialize
