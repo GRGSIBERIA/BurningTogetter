@@ -1,3 +1,5 @@
+require './sources/comment.rb'
+
 class Article
   def initialize(article_page)
     @page = article_page
@@ -34,5 +36,5 @@ class Article
     comments_array
   end
 
-  attr_reader :page, :count, :master, :favorite, :view
+  attr_reader :page, :count, :master, :favorite, :view, :comments
 end
