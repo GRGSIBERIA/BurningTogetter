@@ -5,7 +5,7 @@ class Article
     @master = GetMaster()
     @date = nil
     @favorite = GetFavorite()
-    @view = nil
+    @view = GetView()
   end
 
   def GetMaster()
@@ -15,7 +15,12 @@ class Article
 
   def GetFavorite()
     path = "div.info_box > div.info_status > span"
-    @favorite = @page.search(path)[0].split(' ')[0].to_i
+    @favorite = @page.search(path)[0].inner_text.split(' ')[0].to_i
+  end
+
+  def GetView()
+    path = "div.info_box > div.info_status > span"
+    @view = @page.search(path)[1].inner_text.split(' ')[0].to_i
   end
 
   attr_reader :page, :count
