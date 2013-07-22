@@ -3,7 +3,7 @@ class Comment
     @comment_node = comment_node
     @user_name = GetUserName()
     @favorite = GetFavorite()
-    @text = nil
+    @text = GetText()
     @color = nil
   end
 
@@ -15,6 +15,11 @@ class Comment
   def GetFavorite()
     path = "div.status > div.status_right > a.icon_fav"
     @comment_node.at(path).inner_text.to_i
+  end
+
+  def GetText()
+    path = "div.balloon_body > div.tweet"
+    @comment_node.at(path).inner_text
   end
   #attr_reader :comment, :user_name, :favorite, :text, :color
 end
