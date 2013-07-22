@@ -13,7 +13,7 @@ class ArticleAgent
     articles = []
     for link in listing.links
       puts "get article: #{link}"
-      articles << Article.new(@agent.get(link))
+      articles << Article.new(link, @agent.get(link))
     end
 
     return articles

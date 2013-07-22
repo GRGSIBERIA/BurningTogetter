@@ -1,7 +1,9 @@
 require './sources/comment.rb'
 
 class Article
-  def initialize(article_page)
+  def initialize(link, article_page)
+    @link = link
+    @id = link.split('/').last.to_i
     @page = article_page
     @master = GetMaster()
     @date = nil
@@ -35,5 +37,5 @@ class Article
     comments_array
   end
 
-  attr_reader :page, :master, :favorite, :view, :comments
+  attr_reader :link, :id, :page, :master, :favorite, :view, :comments
 end
