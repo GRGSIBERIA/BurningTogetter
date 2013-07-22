@@ -13,5 +13,7 @@ class ArticleAgent
     for link in listing.links
       articles << @agent.get(link)
     end
+
+    return Article.new(articles)
   end
 end

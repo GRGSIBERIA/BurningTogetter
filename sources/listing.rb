@@ -1,9 +1,7 @@
-require 'mechanize'
-
 class Listing
   def initialize(pages, keyword, range)
     @pages = pages
-    @length = pages.length
+    @count = pages.length
     @keyword = keyword
     @range = range
     @links = GetArticleLinks()
@@ -33,5 +31,5 @@ class Listing
     return GetArticleLinksInListing(topics_links)
   end
 
-  attr_reader :pages, :length, :keyword, :range, :links
+  attr_reader :pages, :count, :keyword, :range, :links
 end
