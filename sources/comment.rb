@@ -4,7 +4,7 @@ class Comment
     @user_name = GetUserName()
     @favorite = GetFavorite()
     @text = GetText()
-    @color = nil
+    # 色は取れないことがわかったのでやめる
   end
 
   def GetUserName()
@@ -21,5 +21,5 @@ class Comment
     path = "div.balloon_body > div.tweet"
     @comment_node.at(path).inner_text
   end
-  #attr_reader :comment, :user_name, :favorite, :text, :color
+  attr_reader :comment, :user_name, :favorite, :text
 end
