@@ -16,6 +16,7 @@ class Listing
       article_links << GetArticleLinksInListingPage(i)
     end
     puts "end to get links: count=> #{article_links.length}"
+    puts ""
     return article_links
   end
 

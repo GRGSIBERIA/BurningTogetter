@@ -8,4 +8,10 @@ class ArticleAgent
   end
 
   def GetArticles(listing)
+    puts "start to get articles"
+    articles = []
+    for link in listing.links
+      articles << @agent.get(link)
+    end
+  end
 end
