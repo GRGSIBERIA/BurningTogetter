@@ -5,17 +5,39 @@ require 'sequel'
 require './sources/listing_agent.rb'
 require './sources/article_agent.rb'
 
-listing_agent = ListingAgent.new
-listing = listing_agent.Listing("無断転載", 1..1)
+search_keyword = "無断転載"
+range = 1..1
 
-article_agent = ArticleAgent.new
-articles = article_agent.GetArticles(listing)
+def GetArticleAndComments(search_keyword, range)
+  listing_agent = ListingAgent.new
+  listing = listing_agent.Listing(search_keyword, range)
 
-for article in articles
-  puts "----------------------"
-  puts article.master
-  for comment in article.comments
-    puts "#{comment.user_name}: #{comment.text.tosjis}"
-  end
-  puts "----------------------"
+  article_agent = ArticleAgent.new
+  return article_agent.GetArticles(listing)
 end
+
+def AddUser(db, user_name)
+  begin
+    db << {:user_name => user_name, :user_id => 0}
+  rescue
+    
+  end
+  return db.where(:user_name => user_name).limit(1).all
+end
+
+def AddArticle(db, user, article)
+  begin
+    db.insert(
+      :user_id => user[:user_id].to_i)
+  rescue
+
+  end
+end
+
+db = Sequel.sqlite("database.db")
+
+AddUser(db[:users], "A")
+AddUser(db[:users], "B")
+AddUser(db[:users], "C")
+puts db[:users].all
+
