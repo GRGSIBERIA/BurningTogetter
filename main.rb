@@ -1,18 +1,25 @@
 #-*- encoding: utf-8
+require './models.rb'
 require './sources/listing_agent.rb'
 require './sources/article_agent.rb'
 
-listing_agent = ListingAgent.new
-listing = listing_agent.Listing("無断転載", 1..1)
+def GetArticleAndComments(search_keyword, range)
+  listing_agent = ListingAgent.new
+  listing = listing_agent.Listing(search_keyword, range)
 
-article_agent = ArticleAgent.new
-articles = article_agent.GetArticles(listing)
+  article_agent = ArticleAgent.new
+  return article_agent.GetArticles(listing)
+end
 
-for article in articles
-  puts "----------------------"
-  puts article.master
-  for comment in article.comments
-    puts "#{comment.user_name}: #{comment.text.tosjis}"
+def InsertInstances(articles)
+  for article_inst in articles
+    puts "==============================="
+    master = User.add_master(article_inst.master)
+    article = Article.add(article_inst, master[:user_id])
+    puts article
+    for comment_inst in article_inst.comments
+      user = User.add(comment_inst.user_id, comment_inst.user_name)
+      comment = Comment.add(article_inst, comment_inst)
+    end
   end
-  puts "----------------------"
 end
