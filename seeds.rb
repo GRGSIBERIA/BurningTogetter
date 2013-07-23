@@ -18,26 +18,24 @@ end
 
 def AddUser(db, user_name)
   begin
-    db << {:user_name => user_name, :user_id => 0}
+    db << {:user_name => user_name}
   rescue
     
   end
-  return db.where(:user_name => user_name).limit(1).all
+  return db.where(:user_name => user_name).limit(1).all[0]
 end
 
-def AddArticle(db, user, article)
+def AddArticle(db, article_id, user_id, view, favorite)
   begin
-    db.insert(
-      :user_id => user[:user_id].to_i)
+    db << {
+      :article_id => article_id,
+      :user_id  => user_id,
+      :view     => view,
+      :favorite => favorite}
   rescue
 
   end
+  return db.where(:article_id => db.max(:article_id)).limit(1).all[0]
 end
 
 db = Sequel.sqlite("database.db")
-
-AddUser(db[:users], "A")
-AddUser(db[:users], "B")
-AddUser(db[:users], "C")
-puts db[:users].all
-
