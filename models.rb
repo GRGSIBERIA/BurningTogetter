@@ -16,6 +16,10 @@ class SequelBase
     @@article = @@db[:articles]
     @@comment = @@db[:comments]
   end
+
+  def self.db
+    @@db
+  end
 end
 
 class Article < SequelBase
@@ -34,6 +38,10 @@ class Article < SequelBase
 
   def self.add(article, user_id)
     Article.add_record(article.id, user_id, article.view, article.favorite)
+  end
+
+  def self.db
+    @@article
   end
 end
 
@@ -76,6 +84,10 @@ class User < SequelBase
     end
     return user_id
   end
+
+  def self.db
+    @@user
+  end
 end
 
 class Comment < SequelBase
@@ -95,5 +107,9 @@ class Comment < SequelBase
 
   def self.add(article, comment)
     Comment.add_record(comment.id, article.id, comment.user_id, comment.text, comment.favorite)
+  end
+
+  def self.db
+    @@comment
   end
 end
