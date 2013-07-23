@@ -17,6 +17,10 @@ def GetArticleAndComments(search_keyword, range)
   return article_agent.GetArticles(listing)
 end
 
+articles = GetArticleAndComments(search_keyword, range)
+
 SequelBase.init("./database.db")
 
-puts Users.add("test")
+for article in articles
+  puts User.add_master(article.master)
+end
