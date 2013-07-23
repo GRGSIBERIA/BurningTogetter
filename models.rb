@@ -51,7 +51,6 @@ class User < SequelBase
 
   def self.add_master(user_name)
     exist_user = @@user.where(:user_name => user_name).limit(1).all
-    puts exist_user
     begin
       if exist_user.length == 0 || exist_user == nil then
         user_id = User.twitter_id(user_name)

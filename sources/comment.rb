@@ -6,7 +6,6 @@ class Comment
     @user_name = GetUserName()
     @favorite = GetFavorite()
     @text = GetText()
-    puts @text.tosjis
     # 色は取れないことがわかったのでやめる
   end
 
