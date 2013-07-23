@@ -1,10 +1,11 @@
 require './sources/comment.rb'
 
 class Article
-  def initialize(link, article_page)
+  def initialize(link, agent)
+    @agent = agent
     @link = link
     @id = link.split('/').last.to_i
-    @page = article_page
+    @page = @agent.get(link)
     @master = GetMaster()
     @date = nil
     @favorite = GetFavorite()

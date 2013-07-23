@@ -13,7 +13,8 @@ class ArticleAgent
     articles = []
     for link in listing.links
       puts "get article: #{link}"
-      articles << Article.new(link, @agent.get(link))
+      article_agent = Mechanize.new
+      articles << Article.new(link, article_agent)
     end
 
     return articles
