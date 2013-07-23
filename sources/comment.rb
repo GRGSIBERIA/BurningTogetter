@@ -1,7 +1,7 @@
 class Comment
   def initialize(comment_node)
     @comment_node = comment_node
-    @comment_id = GetCommentID()
+    @id = GetCommentID()
     @user_id = GetUserID()
     @user_name = GetUserName()
     @favorite = GetFavorite()
@@ -33,5 +33,5 @@ class Comment
     path = "div.balloon_body > div.tweet"
     @comment_node.at(path).inner_text
   end
-  attr_reader :comment, :user_name, :favorite, :text
+  attr_reader :comment, :id, :user_id, :user_name, :favorite, :text
 end

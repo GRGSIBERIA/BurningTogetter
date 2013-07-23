@@ -21,6 +21,11 @@ articles = GetArticleAndComments(search_keyword, range)
 
 SequelBase.init("./database.db")
 
-for article in articles
-  puts User.add_master(article.master)
+for article_inst in articles
+  user = User.add_master(article_inst.master)
+  article = Article.add(article_inst, user[:user_id])
+
+  for comment_inst in article_inst.comments
+    comment = Comment.add(user[:user_id], article_inst, comment_inst)
+  end
 end
