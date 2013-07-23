@@ -19,7 +19,7 @@ class SequelBase
 end
 
 class Article < SequelBase
-  def self.add(article_id, user_id, view, favorite)
+  def self.add_record(article_id, user_id, view, favorite)
     begin
       @@article << {
         :article_id => article_id,
@@ -33,7 +33,7 @@ class Article < SequelBase
   end
 
   def self.add(article, user_id)
-    Article.add(article.id, user_id, article.view, article.favorite)
+    Article.add_record(article.id, user_id, article.view, article.favorite)
   end
 end
 
@@ -51,17 +51,19 @@ class User < SequelBase
 
   def self.add_master(user_name)
     exist_user = @@user.where(:user_name => user_name).limit(1).all
+    puts exist_user
     begin
       if exist_user.length == 0 || exist_user == nil then
         user_id = User.twitter_id(user_name)
         if user_id != nil then
           exist_user = User.add(user_id, user_name)
+          return exist_user
         end
       end
     rescue
 
     end
-    return exist_user
+    return exist_user[0]
   end
 
   def self.twitter_id(user_name)
@@ -78,7 +80,7 @@ class User < SequelBase
 end
 
 class Comment < SequelBase
-  def self.add(comment_id, article_id, user_id, text, favorite)
+  def self.add_record(comment_id, article_id, user_id, text, favorite)
     begin
       @@comment << {
         :comment_id => comment_id,
@@ -93,6 +95,6 @@ class Comment < SequelBase
   end
 
   def self.add(article, comment)
-    Comment.add(comment.id, article.id, comment.user_id, comment.text, comment.favorite)
+    Comment.add_record(comment.id, article.id, comment.user_id, comment.text, comment.favorite)
   end
 end

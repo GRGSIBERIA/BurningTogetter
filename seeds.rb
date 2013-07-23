@@ -22,10 +22,16 @@ articles = GetArticleAndComments(search_keyword, range)
 SequelBase.init("./database.db")
 
 for article_inst in articles
-  user = User.add_master(article_inst.master)
-  article = Article.add(article_inst, user[:user_id])
-
+  puts "==============================="
+  master = User.add_master(article_inst.master)
+  article = Article.add(article_inst, master[:user_id])
+  puts master
+  puts article
+  puts "-------------------------------"
   for comment_inst in article_inst.comments
-    comment = Comment.add(user[:user_id], article_inst, comment_inst)
+    user = User.add(comment_inst.user_id, comment_inst.user_name)
+    comment = Comment.add(article_inst, comment_inst)
+    puts user
+    puts comment[:text].tosjis
   end
 end
