@@ -1,10 +1,22 @@
 class Comment
   def initialize(comment_node)
     @comment_node = comment_node
+    @comment_id = GetCommentID()
+    @user_id = GetUserID()
     @user_name = GetUserName()
     @favorite = GetFavorite()
     @text = GetText()
     # 色は取れないことがわかったのでやめる
+  end
+
+  def GetCommentID()
+    path = "div.balloon_module > div.balloon_body"
+    @comment_node.at(path).attribute("data-comment-id").inner_text.to_i
+  end
+
+  def GetUserID()
+    path = "div.balloon_module > div.balloon_body"
+    @comment_node.at(path).attribute("data-user-id").inner_text.to_i
   end
 
   def GetUserName()
