@@ -91,7 +91,7 @@ class Comment < SequelBase
     rescue
 
     end
-    return @@comment.where(:comment_id => @@comment.max(:comment_id)).limit(1).all[0]
+    return @@comment.where(:comment_id => comment_id).limit(1).all[0]
   end
 
   def self.add(article, comment)

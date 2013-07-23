@@ -17,21 +17,23 @@ def GetArticleAndComments(search_keyword, range)
   return article_agent.GetArticles(listing)
 end
 
-articles = GetArticleAndComments(search_keyword, range)
+def InsertInstances(articles)
+  SequelBase.init("./database.db")
 
-SequelBase.init("./database.db")
-
-for article_inst in articles
-  puts "==============================="
-  master = User.add_master(article_inst.master)
-  article = Article.add(article_inst, master[:user_id])
-  puts master
-  puts article
-  puts "-------------------------------"
-  for comment_inst in article_inst.comments
-    user = User.add(comment_inst.user_id, comment_inst.user_name)
-    comment = Comment.add(article_inst, comment_inst)
-    puts user
-    puts comment[:text].tosjis
+  for article_inst in articles
+    puts "==============================="
+    master = User.add_master(article_inst.master)
+    article = Article.add(article_inst, master[:user_id])
+    puts master
+    puts article
+    puts "-------------------------------"
+    for comment_inst in article_inst.comments
+      user = User.add(comment_inst.user_id, comment_inst.user_name)
+      comment = Comment.add(article_inst, comment_inst)
+    end
   end
 end
+
+articles = GetArticleAndComments(search_keyword, range)
+InsertInstances(articles)
+
