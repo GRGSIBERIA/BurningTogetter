@@ -6,6 +6,6 @@ range = 1..10
 
 SequelBase.init("./database.db")
 articles = GetArticleAndComments(search_keyword, range)
-InsertInstances(articles)
+InsertInstances(articles, search_keyword)
 
 puts User.db.where().limit(100).all

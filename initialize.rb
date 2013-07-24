@@ -20,6 +20,7 @@ db.create_table :articles do
   foreign_key :user_id, :table=>:users, :type=>Integer, :null=>false
   Integer :view, :null=>false
   Integer :favorite, :null=>false
+  String :search_keyword, :null=>false
   index :article_id
 end
 

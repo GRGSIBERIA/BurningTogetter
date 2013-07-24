@@ -11,11 +11,11 @@ def GetArticleAndComments(search_keyword, range)
   return article_agent.GetArticles(listing)
 end
 
-def InsertInstances(articles)
+def InsertInstances(articles, search_keyword)
   for article_inst in articles
     puts "==============================="
     master = User.add_master(article_inst.master)
-    article = Article.add(article_inst, master[:user_id])
+    article = Article.add(article_inst, master[:user_id], search_keyword)
     puts article
     for comment_inst in article_inst.comments
       user = User.add(comment_inst.user_id, comment_inst.user_name)

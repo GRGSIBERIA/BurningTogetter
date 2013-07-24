@@ -23,21 +23,22 @@ class SequelBase
 end
 
 class Article < SequelBase
-  def self.add_record(article_id, user_id, view, favorite)
+  def self.add_record(article_id, user_id, view, favorite, search_keyword)
     begin
       @@article << {
         :article_id => article_id,
         :user_id  => user_id,
         :view     => view,
-        :favorite => favorite}
+        :favorite => favorite,
+        :search_keyword => search_keyword}
     rescue
 
     end
     return @@article.where(:article_id => article_id).limit(1).all[0]
   end
 
-  def self.add(article, user_id)
-    Article.add_record(article.id, user_id, article.view, article.favorite)
+  def self.add(article, user_id, search_keyword)
+    Article.add_record(article.id, user_id, article.view, article.favorite, search_keyword)
   end
 
   def self.db
