@@ -1,5 +1,5 @@
 #-*- encoding: utf-8
-require './main.rb'
+require './sources/crawler.rb'
 
 search_keyword = "無断転載"
 range = 1..10
